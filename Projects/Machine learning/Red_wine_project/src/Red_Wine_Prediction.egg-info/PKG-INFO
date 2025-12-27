@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: Red_Wine_Prediction
+Version: 0.0.0
+Summary: A small python package for ML application
+Home-page: https://github.com/Shivanshvyas1729/Projects
+Author: shivansh vyas
+Author-email: shivanshvyas1729@gmail.com
+Project-URL: Bug Tracker, https://github.com/Shivanshvyas1729/Projects/tree/main/Projects/Machine%20learning/Red_wine_project
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: notebook
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: python-box
+Requires-Dist: pyYAML
+Requires-Dist: tqdm
+Requires-Dist: ensure==1.0.2
+Requires-Dist: joblib
+Requires-Dist: types-pyYAML
+Requires-Dist: Flask
+Requires-Dist: flask-cors
+Dynamic: author
+Dynamic: author-email
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-dist
+Dynamic: summary

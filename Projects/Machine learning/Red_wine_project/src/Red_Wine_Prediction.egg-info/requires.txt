@@ -7,10 +7,7 @@ python-box
 pyYAML
 tqdm
 ensure==1.0.2
-joblib 
+joblib
 types-pyYAML
 Flask
 flask-cors
-
--e .
-  #setup.py file path
