@@ -97,7 +97,7 @@ __version__ = "0.0.0"
 
 REPO_NAME = "End-to-end-ML-Project"
 AUTHOR_USER_NAME = "shivansh_vyas"
-SRC_REPO = "Projects/Projects/Machine learning/Red_wine_project/"
+SRC_REPO = "Red_Wine_Prediction"
 AUTHOR_EMAIL = "shivanshvyas1729@gmail.com"
 
 def get_requirements(file_path: str) -> List[str]:
@@ -111,7 +111,7 @@ def get_requirements(file_path: str) -> List[str]:
     return requirements
 
 setuptools.setup(
-    name=SRC_REPO,
+    name=SRC_REPO,# must be pakage name
     version=__version__,
     author=AUTHOR_USER_NAME,
     author_email=AUTHOR_EMAIL,

@@ -1,0 +1,107 @@
+
+
+# Root directory where all pipeline artifacts will be stored
+# (datasets, intermediate outputs, models, metrics, etc.)
+artifacts_root: artifacts
+
+
+# =========================
+# Data Ingestion Stage
+# =========================
+data_ingestion:
+
+  # Directory for all data-ingestion–related artifacts
+  # Example: downloaded zip, extracted files
+  root_dir: artifacts/data_ingestion
+
+
+  # Public URL from where the raw dataset is downloaded
+  # This should be a *direct downloadable* link (GitHub raw URL, S3, etc.)
+  source_URL: https://github.com/entbappy/Branching-tutorial/raw/master/winequality-data.zip
+
+
+  # Local path where the downloaded ZIP file will be saved
+  # Used by the ingestion script to store the raw compressed data
+  local_data_file: artifacts/data_ingestion/data.zip
+
+
+  # Directory where the ZIP file will be extracted
+  # Final CSV files will be available here after unzip
+  unzip_dir: artifacts/data_ingestion
+
+
+# =========================
+# Data Validation Stage
+# =========================
+
+data_validation:
+  # Root directory where all data validation artifacts will be stored
+  # Example: validation reports, status files
+  root_dir: artifacts/data_validation
+
+  # Path to the extracted raw dataset that needs to be validated
+  # This file comes from the data ingestion stage
+  # Use forward slashes for OS-independent paths
+  unzip_data_dir: artifacts/data_ingestion/winequality-red.csv
+
+  # File that stores validation status (success/failure)
+  # Used to track whether data passed schema checks
+  STATUS_FILE: artifacts/data_validation/status.txt
+
+
+# =========================
+# Data Transformation Stage
+# =========================
+
+
+data_transformation:
+  root_dir: artifacts/data_transformation 
+  data_path: artifacts/data_ingestion/winequality-red.csv
+
+  
+
+
+
+
+
+
+# 🔧 How Each Field Is Used in Code
+# 1️⃣ artifacts_root
+# os.makedirs(config.artifacts_root, exist_ok=True)
+
+
+# 👉 Creates a single top-level folder for all ML outputs
+
+# 2️⃣ root_dir
+# os.makedirs(config.data_ingestion.root_dir, exist_ok=True)
+
+
+# 👉 Stores all ingestion-related files
+
+# 3️⃣ source_URL
+# urllib.request.urlretrieve(
+#     config.data_ingestion.source_URL,
+#     config.data_ingestion.local_data_file
+# )
+
+
+# 👉 Downloads dataset from GitHub
+
+# 4️⃣ local_data_file
+# with zipfile.ZipFile(local_zip, 'r') as zip_ref:
+#     zip_ref.extractall(config.data_ingestion.unzip_dir)
+
+
+# 👉 Location of downloaded ZIP before extraction
+
+# 5️⃣ unzip_dir
+# df = pd.read_csv(
+#     os.path.join(config.data_ingestion.unzip_dir, "winequality-red.csv"),
+#     sep=";"
+# )
+
+
+# 👉 Used by data validation / training stages
+
+
+

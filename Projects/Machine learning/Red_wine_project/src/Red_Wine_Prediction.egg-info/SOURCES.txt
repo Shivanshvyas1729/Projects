@@ -8,11 +8,13 @@ src/Red_Wine_Prediction.egg-info/dependency_links.txt
 src/Red_Wine_Prediction.egg-info/requires.txt
 src/Red_Wine_Prediction.egg-info/top_level.txt
 src/Red_Wine_Prediction/components/__init__.py
+src/Red_Wine_Prediction/components/data_ingestion.py
 src/Red_Wine_Prediction/config/__init__.py
 src/Red_Wine_Prediction/config/configuration.py
 src/Red_Wine_Prediction/constants/__init__.py
 src/Red_Wine_Prediction/entity/__init__.py
 src/Red_Wine_Prediction/entity/config_entity.py
 src/Red_Wine_Prediction/pipeline/__init__.py
+src/Red_Wine_Prediction/pipeline/stage_01_data_ingestion.py
 src/Red_Wine_Prediction/utils/__init__.py
 src/Red_Wine_Prediction/utils/common.py

@@ -24,7 +24,7 @@ from typing import Any
 
 from box import ConfigBox
 from box.exceptions import BoxValueError
-from ensure import ensure_annotations
+from ensure import ensure_annotations #@ensure_annotations = runtime type checker for function annotations
 
 from Red_Wine_Prediction import logger
 
@@ -57,7 +57,8 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
         ConfigBox: YAML content as attribute-accessible object
     """
     try:
-        with open(path_to_yaml) as yaml_file:
+        with open(path_to_yaml, "r", encoding="utf-8") as yaml_file:
+
             content = yaml.safe_load(yaml_file)
 
             # Log successful YAML loading

@@ -1,3 +1,7 @@
+
+// cspell:disable
+
+
 Here is a **clean, professional, industry-standard README.md** rewritten from your content in **proper Markdown format**.
 You can **directly copy-paste this into `README.md`**.
 
@@ -11,8 +15,7 @@ This project demonstrates an **end-to-end machine learning workflow** for predic
 
 ## 📁 Project Workflow
 
-Follow these steps when updating or extending the project:
-
+Follow these steps when updating or extending the project
 1. Update `config.yaml`
 2. Update `schema.yaml`
 3. Update `params.yaml`
@@ -171,7 +174,7 @@ ECR_REPOSITORY_NAME=simple-app
 
 ---
 
-### ⭐ Interview Tip (1 line)
+
 
 > *This project demonstrates an end-to-end ML pipeline with automated AWS deployment using Docker and GitHub Actions.*
 
