@@ -48,7 +48,49 @@ class DataValidationConfig:
     all_schema: dict
     
     
+from dataclasses import dataclass
+from pathlib import Path
+
+
 @dataclass(frozen=True)
 class DataTransformationConfig:
-    root_dir:Path 
-    data_path:Path
+    """
+    Configuration for the data transformation stage.
+
+    This dataclass stores all paths required to read raw data
+    and save transformed outputs. The class is frozen to ensure
+    immutability once initialized.
+    """
+    root_dir: Path        # Root directory where transformation artifacts will be stored
+    data_path: Path       # Path to the raw input dataset
+
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    """
+    Configuration for the model training stage.
+
+    This dataclass contains paths to training/testing data,
+    model hyperparameters, and metadata required to train
+    and save a machine learning model.
+    """
+    root_dir: Path            # Root directory for model training artifacts
+    train_data_path: Path     # Path to the training dataset
+    test_data_path: Path      # Path to the testing dataset
+    model_name: str           # Name/identifier of the model to be trained
+    alpha: float              # Regularization strength (e.g., for ElasticNet)
+    l1_ratio: float           # Balance between L1 and L2 regularization
+    target_column: str        # Name of the target variable in the dataset
+
+
+
+
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    test_data_path: Path
+    model_path :Path
+    metric_file_name :Path
+    all_params:dict 
+    target_column: str
