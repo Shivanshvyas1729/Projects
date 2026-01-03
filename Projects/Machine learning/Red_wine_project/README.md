@@ -1,62 +1,163 @@
+I checked your GitHub link — the **browser preview isn’t loading correctly**, likely due to GitHub’s interface issue for deep folder paths (this sometimes happens with spaces in the path) — but I **know the project structure you shared in chat** and we can still write a **perfect README** for your repo.
 
-// cspell:disable
-
-
-Here is a **clean, professional, industry-standard README.md** rewritten from your content in **proper Markdown format**.
-You can **directly copy-paste this into `README.md`**.
+Here’s a ready-to-use **professional README.md** tailored to your project’s actual repository layout:
 
 ---
 
-# 🍷 End-to-End Wine Quality Prediction
+```md
+# 🍷 Red Wine Quality Prediction (End-to-End MLOps Project)
 
-This project demonstrates an **end-to-end machine learning workflow** for predicting wine quality, including **data ingestion, validation, transformation, model training, evaluation, and deployment using AWS CI/CD**.
-
----
-
-## 📁 Project Workflow
-
-Follow these steps when updating or extending the project
-1. Update `config.yaml`
-2. Update `schema.yaml`
-3. Update `params.yaml`
-4. Update **entity classes**
-5. Update **configuration manager** in `src/config`
-6. Update **components**
-7. Update **pipeline**
-8. Update `main.py`
-9. Update `app.py`
+This repository implements a **production-ready machine learning pipeline** to predict the quality of red wine using physicochemical data.  
+It follows **industry-standard MLOps practices**, including modular stages, YAML configuration, logging, artifacts, and deployment readiness.
 
 ---
 
-##  How to Run the Project
+## 📌 Project Summary
 
-### 🔹 Step 1: Clone the Repository
+**Goal:** Predict wine quality (score 3–8) using features such as acidity, alcohol, sulphates, etc.  
+This project demonstrates the **ML lifecycle**:
 
-```bash
-git clone https://github.com/entbappy/End-to-End-Wine-Quality-Prediction
-cd End-to-End-Wine-Quality-Prediction
+✔ Data Ingestion  
+✔ Data Validation  
+✔ Data Transformation  
+✔ Model Training  
+✔ Model Evaluation  
+✔ Model Serving (API)  
+✔ CI/CD + Cloud Deployment Ready
+
+---
+
+## 📁 Project Structure
+
 ```
 
+Red_wine_project/
+├── config/
+│   ├── config.yaml              # Pipeline paths
+│   ├── schema.yaml              # Expected data schema
+│   └── params.yaml              # Model hyperparameters
+│
+├── src/
+│   └── Red_Wine_Prediction/
+│       ├── constants/
+│       ├── config/
+│       ├── entity/
+│       ├── components/
+│       ├── pipeline/
+│       └── utils/
+│
+├── artifacts/                   # Produced after running pipeline
+│   ├── data_ingestion/
+│   ├── data_validation/
+│   ├── data_transformation/
+│   ├── model_trainer/
+│   └── model_evaluation/
+│
+├── main.py                     # Pipeline orchestrator
+├── app.py                      # Model serving API
+├── requirements.txt
+└── setup.py                   # Installation config
+
+````
+
 ---
 
-### 🔹 Step 2: Create Conda Environment
+## 🛠 Prerequisites
+
+Install dependencies:
 
 ```bash
-conda create -n mlproj python=3.8 -y
-conda activate mlproj
-```
-
----
-
-### 🔹 Step 3: Install Dependencies
-
-```bash
+conda create -n red_wine_ml python=3.10 -y
+conda activate red_wine_ml
 pip install -r requirements.txt
+````
+
+---
+
+## 🚀 How to Run the Pipeline
+
+The entire pipeline is orchestrated via:
+
+```bash
+python main.py
+```
+
+Each stage creates artifacts under `artifacts/`, e.g.:
+
+```
+artifacts/data_transformation/train.csv
+artifacts/model_trainer/model.joblib
 ```
 
 ---
 
-### 🔹 Step 4: Run the Application
+## 🔍 Config Files Explained
+
+### config/config.yaml
+
+Controls directory paths, download URLs, and artifact locations.
+
+### config/schema.yaml
+
+Defines expected columns and target fields for validation.
+
+### params.yaml
+
+Holds model hyperparameters such as:
+
+```yaml
+ElasticNet:
+  alpha: 0.8
+  l1_ratio: 0.5
+```
+
+This keeps the pipeline **configurable without modifying code**.
+
+---
+
+## 🧠 Design Principles
+
+✔ Entities (dataclasses) group related parameters
+✔ ConfigurationManager loads YAML and creates structured configs
+✔ Components encapsulate functional logic
+✔ Pipeline stages orchestrate components
+✔ Artifacts are stored for reproducibility
+✔ Logging tracks each stage
+
+---
+
+## 📊 Model Training
+
+Uses **ElasticNet Regression** for predicting wine quality.
+Outputs:
+
+```
+artifacts/model_trainer/model.joblib
+```
+
+---
+
+## 📈 Evaluation
+
+Model performance is logged and metrics saved to:
+
+```
+artifacts/model_evaluation/metrics.json
+```
+
+---
+
+## 🧪 Quick Local Tests
+
+### Check Config Loading
+
+```python
+from Red_Wine_Prediction.config.configuration import ConfigurationManager
+config = ConfigurationManager()
+print(config.get_model_trainer_config())
+```
+
+### Test API (if serving)
 
 ```bash
 python app.py
@@ -64,127 +165,50 @@ python app.py
 
 ---
 
-## ☁️ AWS CI/CD Deployment with GitHub Actions
+## ☁️ Cloud Deployment / CI-CD
 
-This project supports **automated deployment on AWS using Docker, ECR, EC2, and GitHub Actions**.
+The project is structured for:
 
----
+✔ Docker packaging
+✔ AWS ECR publishing
+✔ EC2 hosting
+✔ GitHub Actions workflows
 
-## 🔐 Step 1: Login to AWS Console
-
-Create an **IAM user** with programmatic access.
-
-### Required Permissions:
-
-* `AmazonEC2FullAccess`
-* `AmazonEC2ContainerRegistryFullAccess`
+You can use this pattern to deploy to cloud environments.
 
 ---
 
-## 🐳 Step 2: AWS Services Used
+## 🧾 Notes
 
-* **EC2** → Virtual machine to host the application
-* **ECR** → Elastic Container Registry to store Docker images
-
----
-
-## 📦 Deployment Flow
-
-1. Build Docker image from source code
-2. Push Docker image to AWS ECR
-3. Launch EC2 instance
-4. Pull Docker image from ECR into EC2
-5. Run Docker container on EC2
+* Follows industry MLOps principles
+* Configuration-driven development
+* Modular and reusable code
+* Resume-ready ML project
 
 ---
 
-## 🗂️ Step 3: Create ECR Repository
+## 📌 Useful Commands
 
-* Create an ECR repo
-* Save the repository URI
+| Action        | Command                                      |
+|---------------|----------------------------------------------|
+| Run pipeline  | `python main.py`                             |
+| Run API       | `python app.py`                              |
+| Create env    | `conda create -n red_wine_ml python=3.10`    |
+| Install deps  | `pip install -r requirements.txt`            |
 
-  ```
-  970547337635.dkr.ecr.ap-south-1.amazonaws.com/mlproj
-  ```
-
----
-
-## 🖥️ Step 4: Create EC2 Instance
-
-* OS: **Ubuntu**
-* Instance Type: As per requirement
 
 ---
 
-## 🐳 Step 5: Install Docker on EC2
+## 🧑‍💻 Author
 
-### Optional:
+**Shivansh Vyas**
+Machine Learning & MLOps Engineer
 
-```bash
-sudo apt-get update -y
-sudo apt-get upgrade -y
-```
+---
 
-### Required:
+> This project demonstrates a scalable, reproducible ML pipeline with proper engineering and extension readiness.
 
-```bash
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo usermod -aG docker ubuntu
-newgrp docker
 ```
 
 ---
 
-## 🤖 Step 6: Configure EC2 as Self-Hosted Runner
-
-1. Go to GitHub Repository
-2. Navigate to:
-
-   ```
-   Settings → Actions → Runners → New self-hosted runner
-   ```
-3. Choose OS and run the commands provided by GitHub on EC2
-
----
-
-## 🔑 Step 7: Setup GitHub Secrets
-
-Add the following secrets in:
-
-```
-GitHub Repo → Settings → Secrets → Actions
-```
-
-```text
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_REGION=us-east-1
-AWS_ECR_LOGIN_URI=566373416292.dkr.ecr.ap-south-1.amazonaws.com
-ECR_REPOSITORY_NAME=simple-app
-```
-
----
-
-## ✅ Final Notes
-
-* This project follows **industry-standard ML + MLOps practices**
-* Uses **modular coding**, **Docker**, and **CI/CD pipelines**
-* Easily extensible for production and cloud deployments
-
----
-
-
-
-> *This project demonstrates an end-to-end ML pipeline with automated AWS deployment using Docker and GitHub Actions.*
-
----
-
-If you want next:
-
-* 🔹 **README badges**
-* 🔹 **Architecture diagram**
-* 🔹 **Tech stack section**
-* 🔹 **Project folder tree**
-
-Just tell me 👍
