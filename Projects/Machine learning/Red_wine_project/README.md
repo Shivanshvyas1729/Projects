@@ -1,214 +1,122 @@
-I checked your GitHub link — the **browser preview isn’t loading correctly**, likely due to GitHub’s interface issue for deep folder paths (this sometimes happens with spaces in the path) — but I **know the project structure you shared in chat** and we can still write a **perfect README** for your repo.
+🍷 End-to-End Wine Quality Prediction (MLOps)
 
-Here’s a ready-to-use **professional README.md** tailored to your project’s actual repository layout:
+This project implements a production-style end-to-end machine learning pipeline for predicting red wine quality using physicochemical properties.
+It follows industry-standard MLOps practices, including modular pipelines, configuration-driven development, logging, and CI/CD-ready structure.
 
----
+🚀 Project Overview
 
-```md
-# 🍷 Red Wine Quality Prediction (End-to-End MLOps Project)
+The pipeline covers the complete ML lifecycle:
 
-This repository implements a **production-ready machine learning pipeline** to predict the quality of red wine using physicochemical data.  
-It follows **industry-standard MLOps practices**, including modular stages, YAML configuration, logging, artifacts, and deployment readiness.
+Data Ingestion
 
----
+Data Validation
 
-## 📌 Project Summary
+Data Transformation
 
-**Goal:** Predict wine quality (score 3–8) using features such as acidity, alcohol, sulphates, etc.  
-This project demonstrates the **ML lifecycle**:
+Model Training
 
-✔ Data Ingestion  
-✔ Data Validation  
-✔ Data Transformation  
-✔ Model Training  
-✔ Model Evaluation  
-✔ Model Serving (API)  
-✔ CI/CD + Cloud Deployment Ready
+Model Evaluation
 
----
+Model Serving (API-ready)
 
-## 📁 Project Structure
+CI/CD & Cloud Deployment Ready
 
-```
+The goal is to build a reproducible, scalable, and maintainable ML system, not just a model.
 
-Red_wine_project/
-├── config/
-│   ├── config.yaml              # Pipeline paths
-│   ├── schema.yaml              # Expected data schema
-│   └── params.yaml              # Model hyperparameters
-│
-├── src/
-│   └── Red_Wine_Prediction/
-│       ├── constants/
-│       ├── config/
-│       ├── entity/
-│       ├── components/
-│       ├── pipeline/
-│       └── utils/
-│
-├── artifacts/                   # Produced after running pipeline
-│   ├── data_ingestion/
-│   ├── data_validation/
-│   ├── data_transformation/
-│   ├── model_trainer/
-│   └── model_evaluation/
-│
-├── main.py                     # Pipeline orchestrator
-├── app.py                      # Model serving API
-├── requirements.txt
-└── setup.py                   # Installation config
+🧠 Problem Statement
 
-````
+Predict the quality score (3–8) of red wine samples based on physicochemical features such as acidity, alcohol, sulphates, etc.
 
----
+This is treated as a regression problem.
 
-## 🛠 Prerequisites
+📂 Project Workflow (How to Extend / Modify)
 
-Install dependencies:
+Whenever you add a new pipeline stage or change logic, follow this order:
 
-```bash
-conda create -n red_wine_ml python=3.10 -y
-conda activate red_wine_ml
+Update config.yaml
+
+Update schema.yaml
+
+Update params.yaml
+
+Update entity (dataclass) definitions
+
+Update ConfigurationManager
+
+Update components
+
+Update pipeline stages
+
+Update main.py
+
+Update app.py (if serving logic changes)
+
+This ensures clean dependency flow and avoids runtime errors.
+
+
+
+⚙️ Configuration-Driven Design
+
+config.yaml → Paths & pipeline settings
+
+schema.yaml → Data validation rules
+
+params.yaml → Model hyperparameters
+
+No hardcoded values inside pipeline logic.
+
+🧪 Model Used
+
+ElasticNet Regression
+
+Handles multicollinearity
+
+Controlled via alpha and l1_ratio from params.yaml
+
+📊 Evaluation
+
+Evaluation metrics include:
+
+MAE
+
+RMSE
+
+R² Score
+
+Predictions are optionally clipped to valid quality range (3–8).
+🛠️ How to Run Locally
+1️⃣ Clone the Repository
+git clone https://github.com/Shivanshvyas1729/Red_Wine_Quality_Prediction.git
+cd Red_Wine_Quality_Prediction
+
+2️⃣ Create & Activate Conda Environment
+conda create -n wine_ml python=3.10 -y
+conda activate wine_ml
+
+3️⃣ Install Dependencies
 pip install -r requirements.txt
-````
 
----
-
-## 🚀 How to Run the Pipeline
-
-The entire pipeline is orchestrated via:
-
-```bash
+4️⃣ Run Pipeline
 python main.py
-```
 
-Each stage creates artifacts under `artifacts/`, e.g.:
+☁️ Deployment Ready (AWS CI/CD)
 
-```
-artifacts/data_transformation/train.csv
-artifacts/model_trainer/model.joblib
-```
+The project is structured to support:
 
----
+Docker
 
-## 🔍 Config Files Explained
+AWS ECR
 
-### config/config.yaml
+EC2
 
-Controls directory paths, download URLs, and artifact locations.
+GitHub Actions (CI/CD)
 
-### config/schema.yaml
+Deployment flow:
 
-Defines expected columns and target fields for validation.
+Build Docker image
 
-### params.yaml
+Push to AWS ECR
 
-Holds model hyperparameters such as:
+Pull image on EC2
 
-```yaml
-ElasticNet:
-  alpha: 0.8
-  l1_ratio: 0.5
-```
-
-This keeps the pipeline **configurable without modifying code**.
-
----
-
-## 🧠 Design Principles
-
-✔ Entities (dataclasses) group related parameters
-✔ ConfigurationManager loads YAML and creates structured configs
-✔ Components encapsulate functional logic
-✔ Pipeline stages orchestrate components
-✔ Artifacts are stored for reproducibility
-✔ Logging tracks each stage
-
----
-
-## 📊 Model Training
-
-Uses **ElasticNet Regression** for predicting wine quality.
-Outputs:
-
-```
-artifacts/model_trainer/model.joblib
-```
-
----
-
-## 📈 Evaluation
-
-Model performance is logged and metrics saved to:
-
-```
-artifacts/model_evaluation/metrics.json
-```
-
----
-
-## 🧪 Quick Local Tests
-
-### Check Config Loading
-
-```python
-from Red_Wine_Prediction.config.configuration import ConfigurationManager
-config = ConfigurationManager()
-print(config.get_model_trainer_config())
-```
-
-### Test API (if serving)
-
-```bash
-python app.py
-```
-
----
-
-## ☁️ Cloud Deployment / CI-CD
-
-The project is structured for:
-
-✔ Docker packaging
-✔ AWS ECR publishing
-✔ EC2 hosting
-✔ GitHub Actions workflows
-
-You can use this pattern to deploy to cloud environments.
-
----
-
-## 🧾 Notes
-
-* Follows industry MLOps principles
-* Configuration-driven development
-* Modular and reusable code
-* Resume-ready ML project
-
----
-
-## 📌 Useful Commands
-
-| Action        | Command                                      |
-|---------------|----------------------------------------------|
-| Run pipeline  | `python main.py`                             |
-| Run API       | `python app.py`                              |
-| Create env    | `conda create -n red_wine_ml python=3.10`    |
-| Install deps  | `pip install -r requirements.txt`            |
-
-
----
-
-## 🧑‍💻 Author
-
-**Shivansh Vyas**
-Machine Learning & MLOps Engineer
-
----
-
-> This project demonstrates a scalable, reproducible ML pipeline with proper engineering and extension readiness.
-
-```
-
----
-
+Run container
